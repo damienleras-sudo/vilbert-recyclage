@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact | Devis Gratuit Benne & Collecte Déchets BTP",
@@ -7,13 +8,13 @@ export const metadata: Metadata = {
 };
 
 const horaires = [
-  { jour: "Lundi", heures: "8h00 – 12h00 / 13h00 – 16h30" },
-  { jour: "Mardi", heures: "8h00 – 12h00 / 13h00 – 16h30" },
-  { jour: "Mercredi", heures: "8h00 – 12h00 / 13h00 – 16h30" },
-  { jour: "Jeudi", heures: "8h00 – 12h00 / 13h00 – 16h30" },
-  { jour: "Vendredi", heures: "8h00 – 12h00 / 13h00 – 16h30" },
-  { jour: "Samedi", heures: "Fermé" },
-  { jour: "Dimanche", heures: "Fermé" },
+  { jour: "Lundi", heures: "8h00 – 12h00 / 13h00 – 16h30", open: true },
+  { jour: "Mardi", heures: "8h00 – 12h00 / 13h00 – 16h30", open: true },
+  { jour: "Mercredi", heures: "8h00 – 12h00 / 13h00 – 16h30", open: true },
+  { jour: "Jeudi", heures: "8h00 – 12h00 / 13h00 – 16h30", open: true },
+  { jour: "Vendredi", heures: "8h00 – 12h00 / 13h00 – 16h30", open: true },
+  { jour: "Samedi", heures: "Fermé", open: false },
+  { jour: "Dimanche", heures: "Fermé", open: false },
 ];
 
 export default function ContactPage() {
@@ -23,151 +24,41 @@ export default function ContactPage() {
       <section className="bg-[#1a5c28] text-white py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="inline-block bg-[#f5b800] text-gray-900 text-xs font-bold uppercase px-3 py-1 rounded mb-4 tracking-widest">
-            Contact
+            Contact & Devis
           </div>
           <h1 className="text-4xl md:text-5xl font-black mb-4">
             Demandez votre <span className="text-[#f5b800]">devis gratuit</span>
           </h1>
-          <p className="text-green-100 text-lg max-w-2xl">
-            Notre équipe vous répond sous 24h pour vous proposer la solution adaptée
-            à vos besoins en gestion de déchets BTP.
+          <p className="text-green-100 text-lg max-w-2xl mb-4">
+            Notre équipe vous répond sous 24h pour vous proposer la solution la plus adaptée
+            à vos besoins.
           </p>
+          <div className="flex flex-wrap gap-4 text-sm text-green-200">
+            <span>✅ Devis gratuit et sans engagement</span>
+            <span>✅ Réponse sous 24h</span>
+            <span>✅ BSD et attestations fournis</span>
+          </div>
         </div>
+        <div className="h-1.5 bg-[#f5b800] mt-8" />
       </section>
 
       {/* CONTACT SECTION */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Form */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-              <h2 className="text-2xl font-black text-[#1a5c28] mb-2">
-                Envoyer un message
-              </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+            {/* Form — 3 cols */}
+            <div className="lg:col-span-3 bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+              <h2 className="text-2xl font-black text-[#1a5c28] mb-2">Envoyer un message</h2>
               <div className="w-12 h-1 bg-[#f5b800] mb-6" />
-              <form
-                action={`mailto:recyclage@groupe-vilbert.fr`}
-                method="POST"
-                encType="text/plain"
-                className="space-y-5"
-              >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">
-                      Prénom *
-                    </label>
-                    <input
-                      type="text"
-                      name="prenom"
-                      required
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#1a5c28] focus:ring-1 focus:ring-[#1a5c28]"
-                      placeholder="Jean"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">
-                      Nom *
-                    </label>
-                    <input
-                      type="text"
-                      name="nom"
-                      required
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#1a5c28] focus:ring-1 focus:ring-[#1a5c28]"
-                      placeholder="Dupont"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#1a5c28] focus:ring-1 focus:ring-[#1a5c28]"
-                    placeholder="jean.dupont@exemple.fr"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">
-                    Téléphone
-                  </label>
-                  <input
-                    type="tel"
-                    name="telephone"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#1a5c28] focus:ring-1 focus:ring-[#1a5c28]"
-                    placeholder="06 XX XX XX XX"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">
-                    Vous êtes *
-                  </label>
-                  <select
-                    name="profil"
-                    required
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#1a5c28] focus:ring-1 focus:ring-[#1a5c28] bg-white"
-                  >
-                    <option value="">Sélectionnez...</option>
-                    <option value="particulier">Particulier</option>
-                    <option value="artisan">Artisan / Auto-entrepreneur</option>
-                    <option value="entreprise">Entreprise BTP</option>
-                    <option value="collectivite">Collectivité</option>
-                    <option value="autre">Autre</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">
-                    Type de prestation souhaitée
-                  </label>
-                  <select
-                    name="prestation"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#1a5c28] focus:ring-1 focus:ring-[#1a5c28] bg-white"
-                  >
-                    <option value="">Sélectionnez...</option>
-                    <option value="benne">Location de benne</option>
-                    <option value="collecte">Collecte sur chantier</option>
-                    <option value="apport">Apport en déchetterie</option>
-                    <option value="autre">Autre / Non défini</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">
-                    Votre message *
-                  </label>
-                  <textarea
-                    name="message"
-                    required
-                    rows={5}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#1a5c28] focus:ring-1 focus:ring-[#1a5c28] resize-none"
-                    placeholder="Décrivez votre besoin : type de déchets, volume estimé, adresse du chantier, délai souhaité..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-[#1a5c28] text-white font-bold py-4 rounded-lg hover:bg-[#2a7a38] transition-colors text-base"
-                >
-                  Envoyer ma demande
-                </button>
-                <p className="text-xs text-gray-500 text-center">
-                  * Champs obligatoires. Réponse sous 24h ouvrables.
-                </p>
-              </form>
+              <ContactForm />
             </div>
 
-            {/* Contact info */}
-            <div className="space-y-6">
-              {/* Info card */}
-              <div className="bg-[#1a5c28] text-white rounded-2xl p-8">
+            {/* Info — 2 cols */}
+            <div className="lg:col-span-2 space-y-5">
+              {/* Coordonnées */}
+              <div className="bg-[#1a5c28] text-white rounded-2xl p-7">
                 <h2 className="text-xl font-black mb-2">Nos coordonnées</h2>
-                <div className="w-12 h-1 bg-[#f5b800] mb-6" />
+                <div className="w-12 h-1 bg-[#f5b800] mb-5" />
                 <address className="not-italic space-y-4 text-green-100">
                   <div className="flex items-start gap-3">
                     <span className="text-2xl">📍</span>
@@ -175,45 +66,43 @@ export default function ContactPage() {
                       <p className="font-bold text-white">Déchetterie Pro de Beauval</p>
                       <p>Route nationale</p>
                       <p>80630 Beauval</p>
+                      <a
+                        href="https://maps.google.com/?q=Beauval+80630+Route+nationale"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-[#f5b800] hover:underline mt-1 inline-block"
+                      >
+                        Ouvrir dans Google Maps →
+                      </a>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">📞</span>
                     <div>
-                      <p className="text-xs uppercase tracking-wide font-bold text-green-300">Téléphone</p>
-                      <a href="tel:0322930286" className="hover:text-white font-bold text-lg">
-                        03 22 93 02 86
-                      </a>
+                      <p className="text-xs text-green-300 font-bold uppercase tracking-wide">Téléphone</p>
+                      <a href="tel:0322930286" className="hover:text-white font-black text-xl">03 22 93 02 86</a>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">✉️</span>
                     <div>
-                      <p className="text-xs uppercase tracking-wide font-bold text-green-300">Email</p>
-                      <a href="mailto:recyclage@groupe-vilbert.fr" className="hover:text-white">
-                        recyclage@groupe-vilbert.fr
-                      </a>
+                      <p className="text-xs text-green-300 font-bold uppercase tracking-wide">Email</p>
+                      <a href="mailto:recyclage@groupe-vilbert.fr" className="hover:text-white break-all">recyclage@groupe-vilbert.fr</a>
                     </div>
                   </div>
                 </address>
               </div>
 
               {/* Horaires */}
-              <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm">
-                <h2 className="text-xl font-black text-[#1a5c28] mb-2">
-                  Horaires d&apos;ouverture
-                </h2>
-                <div className="w-12 h-1 bg-[#f5b800] mb-6" />
+              <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                <h2 className="text-lg font-black text-[#1a5c28] mb-2">Horaires d&apos;ouverture</h2>
+                <div className="w-10 h-1 bg-[#f5b800] mb-4" />
                 <table className="w-full text-sm">
                   <tbody className="divide-y divide-gray-100">
                     {horaires.map((h) => (
                       <tr key={h.jour}>
-                        <td className="py-2.5 font-semibold text-gray-700">{h.jour}</td>
-                        <td
-                          className={`py-2.5 text-right ${
-                            h.heures === "Fermé" ? "text-red-400" : "text-gray-600"
-                          }`}
-                        >
+                        <td className="py-2 font-semibold text-gray-700">{h.jour}</td>
+                        <td className={`py-2 text-right text-xs ${h.open ? "text-gray-600" : "text-red-400"}`}>
                           {h.heures}
                         </td>
                       </tr>
@@ -223,22 +112,12 @@ export default function ContactPage() {
               </div>
 
               {/* Zone */}
-              <div className="bg-gray-50 rounded-2xl border border-gray-100 p-6">
-                <h3 className="font-bold text-gray-900 mb-3">Zone d&apos;intervention</h3>
-                <p className="text-gray-600 text-sm mb-3">
-                  Nous intervenons dans toute la région <strong>Hauts-de-France</strong> :
-                </p>
+              <div className="bg-gray-50 rounded-2xl border border-gray-100 p-5">
+                <h3 className="font-bold text-gray-900 mb-3 text-sm">Zone d&apos;intervention</h3>
                 <div className="flex flex-wrap gap-2">
-                  {["Somme (80)", "Pas-de-Calais (62)", "Oise (60)", "Aisne (02)", "Nord (59)", "Seine-Maritime (76)"].map(
-                    (dept) => (
-                      <span
-                        key={dept}
-                        className="bg-[#1a5c28] text-white text-xs px-3 py-1 rounded-full font-medium"
-                      >
-                        {dept}
-                      </span>
-                    )
-                  )}
+                  {["Somme (80)", "Pas-de-Calais (62)", "Oise (60)", "Aisne (02)", "Nord (59)", "Seine-Maritime (76)"].map(dept => (
+                    <span key={dept} className="bg-[#1a5c28] text-white text-xs px-3 py-1 rounded-full font-medium">{dept}</span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -246,21 +125,18 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* MAP placeholder */}
-      <section className="bg-gray-200 h-64 flex items-center justify-center">
-        <div className="text-center text-gray-500">
-          <p className="text-4xl mb-3">🗺️</p>
-          <p className="font-semibold">Déchetterie Pro de Beauval</p>
-          <p className="text-sm">Route nationale, 80630 Beauval</p>
-          <a
-            href="https://maps.google.com/?q=Beauval+80630+Route+nationale"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-3 text-[#1a5c28] font-bold text-sm hover:underline"
-          >
-            Ouvrir dans Google Maps →
-          </a>
-        </div>
+      {/* GOOGLE MAPS */}
+      <section className="h-80">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2571.5!2d2.1668!3d50.0833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47dd573b2c3a7f7d%3A0x0!2sBeauval%2C%2080630!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Déchetterie Vilbert Recyclage — Beauval 80630"
+        />
       </section>
     </>
   );
