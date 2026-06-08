@@ -21,6 +21,8 @@ export async function POST(request: NextRequest) {
       tls: { rejectUnauthorized: false },
     });
 
+    await transporter.verify();
+
     const html = `
 <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden">
   <div style="background:#1a5c28;padding:24px">
@@ -47,13 +49,21 @@ export async function POST(request: NextRequest) {
       from: `"Site Vilbert Recyclage" <${process.env.SMTP_USER}>`,
       to: "recyclage@groupe-vilbert.fr",
       replyTo: email,
-      subject: `🏗️ Demande de devis — ${prenom} ${nom} (${profil || "non précisé"})`,
+      subject: `Demande de devis - ${prenom} ${nom}`,
       html,
     });
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("Email error:", error);
+  } catch (err: unknown) {
+    const e = err as { message?: string; code?: string; command?: string; response?: string; responseCode?: number };
+    console.error("SMTP_ERROR", JSON.stringify({
+      message: e?.message,
+      code: e?.code,
+      command: e?.command,
+      response: e?.response,
+      responseCode: e?.responseCode,
+      user: process.env.SMTP_USER ? process.env.SMTP_USER.slice(0, 5) + "***" : "MANQUANT",
+    }));
     return NextResponse.json({ error: "Erreur d'envoi" }, { status: 500 });
   }
 }
