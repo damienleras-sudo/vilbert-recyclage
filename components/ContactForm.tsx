@@ -3,6 +3,8 @@ import { useState } from "react";
 
 type Status = "idle" | "loading" | "success" | "error";
 
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "";
+
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
 
@@ -11,20 +13,12 @@ export default function ContactForm() {
     setStatus("loading");
 
     const form = e.currentTarget;
-    const data = {
-      prenom: (form.elements.namedItem("prenom") as HTMLInputElement).value,
-      nom: (form.elements.namedItem("nom") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      telephone: (form.elements.namedItem("telephone") as HTMLInputElement).value,
-      profil: (form.elements.namedItem("profil") as HTMLSelectElement).value,
-      prestation: (form.elements.namedItem("prestation") as HTMLSelectElement).value,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-    };
+    const data = Object.fromEntries(new FormData(form));
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(data),
       });
 
@@ -45,13 +39,10 @@ export default function ContactForm() {
         <div className="text-5xl mb-4">✅</div>
         <h3 className="text-xl font-black text-green-800 mb-2">Message envoyé !</h3>
         <p className="text-green-700">
-          Votre demande a bien été transmise à notre équipe. Nous vous répondrons sous 24h ouvrables.
+          Votre demande a bien été transmise. Nous vous répondrons sous 24h ouvrables.
         </p>
         <p className="text-green-600 font-bold mt-4">📞 03 22 93 02 86</p>
-        <button
-          onClick={() => setStatus("idle")}
-          className="mt-6 text-sm text-green-600 hover:underline"
-        >
+        <button onClick={() => setStatus("idle")} className="mt-6 text-sm text-green-600 hover:underline">
           Envoyer un autre message
         </button>
       </div>
@@ -106,7 +97,7 @@ export default function ContactForm() {
 
       {status === "error" && (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700 text-sm">
-          Une erreur est survenue. Veuillez nous contacter directement au{" "}
+          Une erreur est survenue. Contactez-nous au{" "}
           <a href="tel:0322930286" className="font-bold underline">03 22 93 02 86</a>.
         </div>
       )}
@@ -118,9 +109,7 @@ export default function ContactForm() {
       >
         {status === "loading" ? "Envoi en cours..." : "Envoyer ma demande de devis"}
       </button>
-      <p className="text-xs text-gray-500 text-center">
-        * Champs obligatoires. Réponse sous 24h ouvrables.
-      </p>
+      <p className="text-xs text-gray-500 text-center">* Champs obligatoires. Réponse sous 24h ouvrables.</p>
     </form>
   );
 }

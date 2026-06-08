@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,12 +10,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Champs obligatoires manquants" }, { status: 400 });
     }
 
-    if (!process.env.RESEND_API_KEY) {
-      console.error("RESEND_API_KEY manquante");
-      return NextResponse.json({ error: "Configuration email manquante" }, { status: 500 });
-    }
-
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const transporter = nodemailer.createTransport({
+      host: "smtp.office365.com",
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+      tls: { ciphers: "SSLv3" },
+    });
 
     const html = `
 <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden">
@@ -39,22 +43,17 @@ export async function POST(request: NextRequest) {
   </div>
 </div>`;
 
-    const { error } = await resend.emails.send({
-      from: "Vilbert Recyclage <onboarding@resend.dev>",
-      to: ["recyclage@groupe-vilbert.fr"],
+    await transporter.sendMail({
+      from: `"Site Vilbert Recyclage" <${process.env.SMTP_USER}>`,
+      to: "recyclage@groupe-vilbert.fr",
       replyTo: email,
       subject: `🏗️ Demande de devis — ${prenom} ${nom} (${profil || "non précisé"})`,
       html,
     });
 
-    if (error) {
-      console.error("Resend error:", error);
-      return NextResponse.json({ error: "Erreur d'envoi" }, { status: 500 });
-    }
-
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Contact API error:", error);
-    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+    console.error("Email error:", error);
+    return NextResponse.json({ error: "Erreur d'envoi" }, { status: 500 });
   }
 }
