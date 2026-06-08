@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,19 +10,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Champs obligatoires manquants" }, { status: 400 });
     }
 
-    // Gmail service config — requires an App Password (16 chars from Google Account)
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+    if (!process.env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY manquante");
+      return NextResponse.json({ error: "Configuration email manquante" }, { status: 500 });
+    }
 
-    const emailHtml = `
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    const html = `
 <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden">
   <div style="background:#1a5c28;padding:24px">
-    <h2 style="color:white;margin:0;font-size:20px">♻ Vilbert Recyclage — Nouvelle demande</h2>
+    <h2 style="color:white;margin:0;font-size:20px">♻ Vilbert Recyclage — Nouvelle demande de devis</h2>
   </div>
   <div style="padding:24px;background:#f9fafb">
     <table style="width:100%;border-collapse:collapse">
@@ -33,26 +31,30 @@ export async function POST(request: NextRequest) {
       <tr><td style="padding:8px 0;color:#6b7280;font-size:14px">Prestation</td><td style="padding:8px 0">${prestation || "Non renseigné"}</td></tr>
     </table>
     <div style="margin-top:16px;padding:16px;background:white;border-radius:6px;border-left:4px solid #f5b800">
-      <p style="margin:0;color:#374151;font-size:14px;white-space:pre-wrap">${message}</p>
+      <p style="color:#374151;font-size:14px;white-space:pre-wrap;margin:0">${message}</p>
     </div>
   </div>
-  <div style="padding:16px;background:#1a1a1a;text-align:center">
+  <div style="padding:14px;background:#1a1a1a;text-align:center">
     <p style="color:#9ca3af;font-size:12px;margin:0">Vilbert Recyclage — recyclage@groupe-vilbert.fr — 03 22 93 02 86</p>
   </div>
 </div>`;
 
-    await transporter.sendMail({
-      from: `"Site Vilbert Recyclage" <${process.env.SMTP_USER}>`,
-      to: "recyclage@groupe-vilbert.fr",
+    const { error } = await resend.emails.send({
+      from: "Vilbert Recyclage <onboarding@resend.dev>",
+      to: ["recyclage@groupe-vilbert.fr"],
       replyTo: email,
       subject: `🏗️ Demande de devis — ${prenom} ${nom} (${profil || "non précisé"})`,
-      html: emailHtml,
-      text: `Demande de ${prenom} ${nom} — ${email} — ${telephone || ""}\nProfil: ${profil}\nPrestation: ${prestation}\n\n${message}`,
+      html,
     });
+
+    if (error) {
+      console.error("Resend error:", error);
+      return NextResponse.json({ error: "Erreur d'envoi" }, { status: 500 });
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Email error:", error);
-    return NextResponse.json({ error: "Erreur d'envoi" }, { status: 500 });
+    console.error("Contact API error:", error);
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
