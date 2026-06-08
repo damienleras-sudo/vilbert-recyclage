@@ -3,8 +3,6 @@ import { useState } from "react";
 
 type Status = "idle" | "loading" | "success" | "error";
 
-const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "";
-
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
 
@@ -16,9 +14,9 @@ export default function ContactForm() {
     const data = Object.fromEntries(new FormData(form));
 
     try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
@@ -38,9 +36,7 @@ export default function ContactForm() {
       <div className="bg-green-50 border border-green-200 rounded-2xl p-10 text-center">
         <div className="text-5xl mb-4">✅</div>
         <h3 className="text-xl font-black text-green-800 mb-2">Message envoyé !</h3>
-        <p className="text-green-700">
-          Votre demande a bien été transmise. Nous vous répondrons sous 24h ouvrables.
-        </p>
+        <p className="text-green-700">Votre demande a bien été transmise. Nous vous répondrons sous 24h ouvrables.</p>
         <p className="text-green-600 font-bold mt-4">📞 03 22 93 02 86</p>
         <button onClick={() => setStatus("idle")} className="mt-6 text-sm text-green-600 hover:underline">
           Envoyer un autre message
@@ -97,16 +93,12 @@ export default function ContactForm() {
 
       {status === "error" && (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700 text-sm">
-          Une erreur est survenue. Contactez-nous au{" "}
+          Une erreur est survenue. Contactez-nous directement au{" "}
           <a href="tel:0322930286" className="font-bold underline">03 22 93 02 86</a>.
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="w-full bg-[#1a5c28] text-white font-bold py-4 rounded-lg hover:bg-[#2a7a38] transition-colors text-base disabled:opacity-70 disabled:cursor-not-allowed"
-      >
+      <button type="submit" disabled={status === "loading"} className="w-full bg-[#1a5c28] text-white font-bold py-4 rounded-lg hover:bg-[#2a7a38] transition-colors text-base disabled:opacity-70 disabled:cursor-not-allowed">
         {status === "loading" ? "Envoi en cours..." : "Envoyer ma demande de devis"}
       </button>
       <p className="text-xs text-gray-500 text-center">* Champs obligatoires. Réponse sous 24h ouvrables.</p>
