@@ -3,9 +3,19 @@ import Link from "next/link";
 import { blogPosts } from "@/lib/blog-posts";
 
 export const metadata: Metadata = {
-  title: "Blog | Conseils Déchets BTP, Réglementation & Recyclage",
+  title: "Blog Déchets BTP & Recyclage Somme | Vilbert Recyclage",
   description:
-    "Articles et conseils pratiques sur la gestion des déchets BTP, la réglementation, le recyclage et l'économie circulaire. Par Vilbert Recyclage, Beauval (Somme).",
+    "Conseils pratiques, réglementation et actualités sur les déchets BTP et le recyclage dans la Somme. Articles rédigés par les experts de Vilbert Recyclage, Beauval.",
+  alternates: {
+    canonical: "https://www.vilbert-recyclage.fr/blog",
+  },
+  openGraph: {
+    title: "Blog Déchets BTP & Recyclage Somme | Vilbert Recyclage",
+    description:
+      "Conseils pratiques, réglementation et actualités sur les déchets BTP et le recyclage dans la Somme. Articles rédigés par les experts de Vilbert Recyclage, Beauval.",
+    url: "https://www.vilbert-recyclage.fr/blog",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
 };
 
 const categories = ["Tous", "Conseils pratiques", "Réglementation", "Environnement", "Professionnels"];

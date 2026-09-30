@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 220" role="img" aria-label="Vilbert Recyclage">
+  <defs>
+    <linearGradient id="yellowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f5b800"/>
+      <stop offset="70%" stop-color="#f5b800"/>
+      <stop offset="100%" stop-color="#f5b80000"/>
+    </linearGradient>
+  </defs>
+
+  <!-- === RECYCLING SYMBOL === -->
+  <g transform="translate(8, 18) scale(0.92)">
+    <!-- Arrow 1: top-left going up-right -->
+    <path d="M72 14 L88 14 L88 8 L104 22 L88 36 L88 30 L80 30
+             C74 30 69 35 69 41 L69 56 L56 56 L56 41
+             C56 27 63 14 72 14 Z"
+          fill="#1a5c28"/>
+
+    <!-- Arrow 2: right side going down-right -->
+    <path d="M113 56 L120 43 L126 49 L118 28
+             C115 22 109 18 102 18 L98 18 L98 5 L84 19 L98 33 L98 20
+             C105 20 111 24 113 30 L121 52 Z"
+          fill="#1a5c28"/>
+
+    <!-- Arrow 3: bottom going left -->
+    <path d="M44 78 L37 65 L31 71 L40 50
+             C43 44 49 40 56 40 L62 40 L62 27 L76 41 L62 55 L62 42
+             L56 42 C51 42 47 45 45 50 L36 71 Z"
+          fill="#1a5c28"/>
+
+    <!-- Central triangle fill to close the symbol -->
+    <path d="M57 56 L57 41 C57 28 64 15 74 14
+             L88 14 L88 30 C80 30 69 36 69 44 L69 56
+             M102 18 L113 30 C116 36 118 44 115 52 L107 52 L100 66
+             M44 68 L36 70 C30 62 28 53 31 44 L44 56 Z"
+          fill="#1a5c28" opacity="0.15"/>
+  </g>
+
+  <!-- Cleaner recycling symbol using proven path -->
+  <g transform="translate(10, 10)">
+    <text x="0" y="148" font-size="148" fill="#1a5c28"
+          font-family="'Segoe UI Symbol', 'Apple Color Emoji', sans-serif"
+          style="line-height:1">♻</text>
+  </g>
+
+  <!-- === TOP YELLOW BAR === -->
+  <rect x="168" y="42" width="402" height="8" rx="4" fill="#f5b800"/>
+
+  <!-- === VILBERT === -->
+  <text x="168" y="138"
+        font-size="100"
+        font-weight="900"
+        font-family="'Arial Black', 'Impact', 'Franklin Gothic Heavy', sans-serif"
+        fill="#1a5c28"
+        letter-spacing="-2">VILBERT</text>
+
+  <!-- === BOTTOM GRADIENT BAR (short) === -->
+  <rect x="168" y="155" width="130" height="11" rx="4" fill="url(#yellowGrad)"/>
+
+  <!-- === RECYCLAGE === -->
+  <text x="314" y="167"
+        font-size="36"
+        font-weight="600"
+        font-family="'Arial', 'Helvetica Neue', sans-serif"
+        fill="#1a1a1a"
+        letter-spacing="7">RECYCLAGE</text>
+</svg>

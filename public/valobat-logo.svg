@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img" aria-label="Valobat — éco-organisme">
+  <!-- Background pill vert -->
+  <rect width="200" height="80" rx="12" fill="#00A651"/>
+
+  <!-- Feuille / recyclage icône -->
+  <g transform="translate(14,12) scale(1.1)" fill="white">
+    <!-- Feuille stylisée -->
+    <path d="M20 4 C20 4 6 8 6 22 C6 30 12 36 20 36 C28 36 34 30 34 22 C34 14 28 8 20 8" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M20 8 L20 36" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <path d="M14 18 C14 18 17 22 20 22 C23 22 26 18 26 18" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <!-- Flèche circulaire recyclage -->
+    <path d="M10 38 L14 34 L18 38" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M30 38 L26 34 L22 38" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M14 34 C14 34 14 42 20 42 C26 42 26 34 26 34" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Texte VALOBAT -->
+  <text x="60" y="36" font-family="'Arial Black', Arial, sans-serif" font-weight="900" font-size="22" fill="white" letter-spacing="1">VALOBAT</text>
+
+  <!-- Texte sous-titre -->
+  <text x="60" y="52" font-family="Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.85)" letter-spacing="0.5">Éco-organisme PMCB</text>
+
+  <!-- Badge "Opérateur agréé" -->
+  <rect x="59" y="58" width="125" height="14" rx="7" fill="rgba(255,255,255,0.2)"/>
+  <text x="121" y="69" font-family="Arial, sans-serif" font-size="9" fill="white" text-anchor="middle" font-weight="bold" letter-spacing="0.3">OPÉRATEUR AGRÉÉ</text>
+</svg>

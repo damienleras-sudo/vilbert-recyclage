@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { GeoPageContent } from "@/lib/geo-page";
 
 export const metadata: Metadata = {
   title: "Location Benne Abbeville (80) | Collecte Déchets BTP — Vilbert Recyclage",
   description:
     "Location de benne à Abbeville (Somme 80) : collecte et traitement de déchets BTP. Terres, gravats, plâtres, bois. Devis gratuit — Vilbert Recyclage au 03 22 93 02 86.",
-  alternates: { canonical: "https://vilbert-recyclage.vercel.app/location-benne-abbeville" },
+  alternates: { canonical: "https://www.vilbert-recyclage.fr/location-benne-abbeville" },
 };
 
 export default function PageAbbeville() {

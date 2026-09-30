@@ -116,10 +116,21 @@ export function GeoPageContent({
             <div className="bg-gray-50 rounded-xl p-5">
               <h4 className="font-bold text-gray-900 mb-3 text-sm">Autres villes desservies</h4>
               <ul className="space-y-1 text-sm">
-                {["Amiens", "Abbeville", "Albert", "Doullens", "Péronne"].filter(v => v !== city).map(v => (
-                  <li key={v}>
-                    <Link href={`/location-benne-${v.toLowerCase().replace("é", "e").replace("è", "e")}`} className="text-[#1a5c28] hover:underline">
-                      Location benne {v} →
+                {[
+                  { label: "Amiens", slug: "amiens" },
+                  { label: "Abbeville", slug: "abbeville" },
+                  { label: "Albert", slug: "albert" },
+                  { label: "Doullens", slug: "doullens" },
+                  { label: "Péronne", slug: "peronne" },
+                  { label: "Arras", slug: "arras" },
+                  { label: "Lens", slug: "lens" },
+                  { label: "Cambrai", slug: "cambrai" },
+                  { label: "Saint-Quentin", slug: "saint-quentin" },
+                  { label: "Compiègne", slug: "compiegne" },
+                ].filter(v => v.label !== city).map(v => (
+                  <li key={v.slug}>
+                    <Link href={`/location-benne-${v.slug}`} className="text-[#1a5c28] hover:underline">
+                      Location benne {v.label} →
                     </Link>
                   </li>
                 ))}

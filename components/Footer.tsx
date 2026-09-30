@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -37,12 +38,14 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* Logo & desc */}
         <div>
-          <div className="flex items-center gap-2 mb-4">
-            <span className="text-[#f5b800] text-3xl">♻</span>
-            <div>
-              <div className="text-white font-black text-xl">VILBERT</div>
-              <div className="text-gray-400 text-xs tracking-widest">RECYCLAGE</div>
-            </div>
+          <div className="mb-4">
+            <Image
+              src="/logo.png"
+              alt="Vilbert Recyclage"
+              width={200}
+              height={72}
+              className="h-12 w-auto object-contain brightness-0 invert"
+            />
           </div>
           <p className="text-gray-400 text-sm leading-relaxed">
             Filiale du Groupe Vilbert, spécialiste de la gestion des déchets BTP
@@ -56,11 +59,44 @@ export default function Footer() {
             Nos Services
           </h3>
           <ul className="space-y-2 text-gray-400 text-sm">
-            <li><Link href="/services#bennes" className="hover:text-white transition-colors">Location de bennes</Link></li>
-            <li><Link href="/services#collecte" className="hover:text-white transition-colors">Collecte de déchets</Link></li>
-            <li><Link href="/services#transport" className="hover:text-white transition-colors">Transport</Link></li>
-            <li><Link href="/services#traitement" className="hover:text-white transition-colors">Traitement & valorisation</Link></li>
-            <li><Link href="/services#dechets" className="hover:text-white transition-colors">Déchets acceptés</Link></li>
+            <li><Link href="/services" className="hover:text-white transition-colors font-semibold">Tous les services</Link></li>
+            <li><Link href="/services/location-benne" className="hover:text-white transition-colors">🏗️ Location de bennes</Link></li>
+            <li><Link href="/services/broyage-chantier" className="hover:text-white transition-colors">🪓 Broyage sur chantier</Link></li>
+            <li><Link href="/services/valobat-pmcb" className="hover:text-white transition-colors">🟢 Valobat PMCB à 0€</Link></li>
+            <li><Link href="/services/dementelement-menuiseries" className="hover:text-white transition-colors">🪟 Démantèlement menuiseries</Link></li>
+            <li><Link href="/services/compostage" className="hover:text-white transition-colors">🌿 Compostage</Link></li>
+            <li><Link href="/services/especes-invasives" className="hover:text-white transition-colors">🌱 Espèces invasives</Link></li>
+            <li><Link href="/services/vente-materiaux" className="hover:text-white transition-colors">💰 Vente matériaux recyclés</Link></li>
+            <li><Link href="/services/traitement-valorisation" className="hover:text-white transition-colors">♻️ Traitement & Valorisation</Link></li>
+            <li><Link href="/tarifs" className="hover:text-white transition-colors">💶 Tarifs</Link></li>
+            <li><Link href="/realisations" className="hover:text-white transition-colors">📷 Réalisations</Link></li>
+          </ul>
+          <h3 className="font-bold text-[#f5b800] mt-6 mb-3 uppercase text-sm tracking-wide">
+            Certifications
+          </h3>
+          <ul className="space-y-1 text-gray-400 text-xs">
+            <li className="flex items-center gap-1"><span>🏅</span> MASE</li>
+            <li className="flex items-center gap-1"><span>🟢</span> Valobat (opérateur agréé)</li>
+            <li className="flex items-center gap-1"><span>📋</span> Trackdéchets</li>
+          </ul>
+          <h3 className="font-bold text-[#f5b800] mt-6 mb-3 uppercase text-sm tracking-wide">
+            Zones desservies
+          </h3>
+          <ul className="space-y-1 text-gray-400 text-xs">
+            {[
+              { label: "Amiens", slug: "amiens" },
+              { label: "Arras", slug: "arras" },
+              { label: "Abbeville", slug: "abbeville" },
+              { label: "Lens", slug: "lens" },
+              { label: "Cambrai", slug: "cambrai" },
+              { label: "Saint-Quentin", slug: "saint-quentin" },
+            ].map(v => (
+              <li key={v.slug}>
+                <Link href={`/location-benne-${v.slug}`} className="hover:text-white transition-colors">
+                  Benne {v.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -70,16 +106,21 @@ export default function Footer() {
             Informations
           </h3>
           <ul className="space-y-2 text-gray-400 text-sm">
+            <li><Link href="/a-propos" className="hover:text-white transition-colors">À propos de nous</Link></li>
             <li><Link href="/blog" className="hover:text-white transition-colors">Blog & conseils</Link></li>
             <li><Link href="/contact" className="hover:text-white transition-colors">Nous contacter</Link></li>
+            <li><Link href="/faq" className="hover:text-white transition-colors">❓ FAQ</Link></li>
+            <li><Link href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link></li>
+            <li><Link href="/politique-confidentialite" className="hover:text-white transition-colors">Politique de confidentialité</Link></li>
+            <li><Link href="/conditions-generales" className="hover:text-white transition-colors">CGV / CGU</Link></li>
             <li>
               <a
                 href="https://www.groupe-vilbert.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition-colors"
+                className="hover:text-white transition-colors font-semibold text-[#f5b800]"
               >
-                Groupe Vilbert
+                ↗ Groupe Vilbert
               </a>
             </li>
           </ul>
@@ -107,6 +148,26 @@ export default function Footer() {
             <p className="mt-3 border-t border-gray-700 pt-3">
               🕐 Lun – Ven<br />
               8h00 – 12h00 / 13h00 – 16h30
+            </p>
+            <p className="mt-3">
+              <a
+                href="https://share.google/UPFqTI8VQPwXuHbfy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                ⭐ Avis Google
+              </a>
+            </p>
+            <p className="mt-2">
+              <a
+                href="https://www.facebook.com/p/Groupe-Vilbert-100063776760913/?locale=fr_FR"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                📘 Facebook — Groupe Vilbert
+              </a>
             </p>
           </address>
         </div>

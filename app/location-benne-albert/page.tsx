@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { GeoPageContent } from "@/lib/geo-page";
 
 export const metadata: Metadata = {
   title: "Location Benne Albert (80) | Collecte Déchets BTP — Vilbert Recyclage",
   description: "Location de benne à Albert (Somme 80). Collecte et traitement déchets BTP. Devis gratuit — Vilbert Recyclage 03 22 93 02 86.",
-  alternates: { canonical: "https://vilbert-recyclage.vercel.app/location-benne-albert" },
+  alternates: { canonical: "https://www.vilbert-recyclage.fr/location-benne-albert" },
 };
 
 export default function PageAlbert() {

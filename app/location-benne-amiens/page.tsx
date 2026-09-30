@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { GeoPageContent } from "@/lib/geo-page";
 
 export const metadata: Metadata = {
   title: "Location Benne Amiens (80) | Collecte Déchets BTP — Vilbert Recyclage",
   description:
     "Location de benne à Amiens (Somme 80) : collecte et traitement de déchets BTP. Terres, gravats, plâtres, bois. Devis gratuit — Vilbert Recyclage au 03 22 93 02 86.",
-  alternates: { canonical: "https://vilbert-recyclage.vercel.app/location-benne-amiens" },
+  alternates: { canonical: "https://www.vilbert-recyclage.fr/location-benne-amiens" },
 };
 
 export default function PageAmiens() {
